@@ -1,4 +1,4 @@
-import mongoos from 'mongoose';
+import mongoose from 'mongoose';
 
 const Student = new mongoose.Schema({
     name:{type : String, required:true},
