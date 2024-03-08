@@ -1,21 +1,13 @@
 import Router from 'express';
-import Post from './Models/Student.js';
+import Student from './Models/Student.js';
+import StudentController from './Controllers/StudentController.js'
 
 const router = new Router();
 
-router.post('/posts',async(req,res)=>{
-    try{
-        const {name,age,studentClass} = req.body;
-        const student = await Student.create({name,age,studentClass})
-        res.status(200).json(student);
-    }catch(e){
-        res.status(500).json(e);
-    }
-});
-
-router.get('/posts');
-router.get('/posts/:id');
-router.put('/posts');
-router.delete('/posts/:id');
+router.post('/posts',StudentController.create);
+router.get('/posts',StudentController.getAll);
+router.get('/posts/:id',StudentController.getOne);
+router.put('/posts',StudentController.update);
+router.delete('/posts/:id',StudentController.delete);
 
 export default router;
