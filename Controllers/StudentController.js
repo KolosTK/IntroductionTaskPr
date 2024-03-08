@@ -22,7 +22,7 @@ class StudentController{
 
     async getOne (req,res){
         try{
-            const {id} = req.params.id;
+            const {id} = req.value;
             if(!id){throw new Error ('ID don`t set')};
             const student = await Student.findById(id);
             return res.json(student);
@@ -34,8 +34,8 @@ class StudentController{
     async update (req,res){
         try{
             const student = req.body;
-            if(!student.id){throw new Error ('ID don`t set')};
-            const updatedStudent=await Student.findByIdAndUpdate(student._id,student,{new:true});
+            if(!student._id){throw new Error ('ID don`t set')};
+            const updatedStudent=await Student.findByIdAndUpdate(student.id,student,{new:true});
             return res.json(updatedStudent);
         }catch(e){
             res.status(500).json(e);
