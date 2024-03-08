@@ -22,8 +22,8 @@ class StudentController{
 
     async getOne (req,res){
         try{
-            const {id} = req.params;
-            if(!id){res.status(400).json({messege: 'ID don`t exist'})};
+            const {id} = req.params.id;
+            if(!id){throw new Error ('ID don`t set')};
             const student = await Student.findById(id);
             return res.json(student);
         }catch(e){
@@ -34,8 +34,8 @@ class StudentController{
     async update (req,res){
         try{
             const student = req.body;
-            if(!student.id){res.status(400).json({messege: 'ID don`t exist'})};
-            const updatedStudent=await Student.findByIdAndUpdate(student.id,student,{new:true});
+            if(!student.id){throw new Error ('ID don`t set')};
+            const updatedStudent=await Student.findByIdAndUpdate(student._id,student,{new:true});
             return res.json(updatedStudent);
         }catch(e){
             res.status(500).json(e);
@@ -45,7 +45,7 @@ class StudentController{
     async delete (req,res){
         try{
             const {id} = req.params;
-            if(!id){res.status(400).json({messege: 'ID don`t exist'})};
+            if(!id){throw new Error('ID don`t set')};
             const student = await Student.findByIdAndDelete(id);
             return res.json(student);
         }catch(e){
