@@ -14,7 +14,7 @@ const DB_URL ="mongodb+srv://tanyakolosenko1705:irXfH6xT8DqszQSg@cluster0.nhqth5
 app.post('/',async(req,res)=>{
     const {name,age,studentClass} = req.body;
     const student = await Student.create({name,age,studentClass})
-    res.status(200).json('Hello');
+    res.status(200).json(student);
 })
 
 // app.post('/',(req,res)=>{
