@@ -2,24 +2,17 @@ import express from 'express';
 import mongoose from 'mongoose';
 import Student from'./Models/Student.js';
 import Homework from'./Models/Homework.js';
+import router from './router.js'
 
 const PORT = 5005;      
 
 const app = express();
 
 app.use(express.json());
+app.use('/api',router);
 
 const DB_URL ="mongodb+srv://tanyakolosenko1705:irXfH6xT8DqszQSg@cluster0.nhqth5q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-app.post('/',async(req,res)=>{
-    const {name,age,studentClass} = req.body;
-    const student = await Student.create({name,age,studentClass})
-    res.status(200).json(student);
-})
-
-// app.post('/',(req,res)=>{
-//     res.send('This is the post request');
-// })
 
 
 async function startApp()
