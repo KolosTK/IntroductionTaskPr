@@ -6,14 +6,12 @@ import router from './router.js'
 
 const PORT = 5005;      
 
-const app = express();
+var app = express();
 
 app.use(express.json());
 app.use('/api',router);
 
 const DB_URL ="mongodb+srv://tanyakolosenko1705:irXfH6xT8DqszQSg@cluster0.nhqth5q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-
 
 async function startApp()
 {

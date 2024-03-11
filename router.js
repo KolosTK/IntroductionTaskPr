@@ -3,7 +3,6 @@ import StudentController from './Controllers/StudentController.js'
 import HomeworkController from './Controllers/HomeworkController.js'
 
 const router = new Router();
-
 router.post('/students',StudentController.create);
 router.get('/students',StudentController.getAll);
 router.get('/students/:id',StudentController.getOne);
