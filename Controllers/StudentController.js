@@ -1,11 +1,10 @@
 import Student from "../Models/Student.js";
-
+import StudentService from "../Services/StudentService.js";
 
 class StudentController{
     async create (req,res){
         try{
-            const {name,age,studentClass} = req.body;
-            const student = await Student.create({name,age,studentClass})
+            const student = await StudentService.create(req.body)
             res.status(200).json(student);
         }catch(e){
             res.status(500).json(e);
@@ -13,7 +12,7 @@ class StudentController{
     }
     async getAll (req,res){
         try{
-            const students = await Student.find();
+            const students = await StudentService.getAll();
             return res.json(students);
         }catch(e){
             res.status(500).json(e);
@@ -22,9 +21,7 @@ class StudentController{
 
     async getOne (req,res){
         try{
-            const {id} = req.value;
-            if(!id){throw new Error ('ID don`t set')};
-            const student = await Student.findById(id);
+            const student = await StudentService.findById(req.params.id);
             return res.json(student);
         }catch(e){
             res.status(500).json(e);
@@ -33,9 +30,7 @@ class StudentController{
 
     async update (req,res){
         try{
-            const student = req.body;
-            if(!student._id){throw new Error ('ID don`t set')};
-            const updatedStudent=await Student.findByIdAndUpdate(student.id,student,{new:true});
+            const updatedStudent=await StudentService.update(req.body);
             return res.json(updatedStudent);
         }catch(e){
             res.status(500).json(e);
@@ -53,4 +48,4 @@ class StudentController{
         }
     }
 }
-export default new StudentController;
+export default new StudentController();
